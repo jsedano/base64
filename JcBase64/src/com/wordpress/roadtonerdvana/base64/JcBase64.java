@@ -15,73 +15,8 @@ public class JcBase64 {
 
     private static final String BASE64REGEX = "[A-Za-z0-9+/]+[=]{0,2}";
     private static final char PADDINGCHAR = '=';
-    private static final HashMap ENCODEMAP = new HashMap<Integer, Character>() {
-        {
-            put(0, 'A');
-            put(1, 'B');
-            put(2, 'C');
-            put(3, 'D');
-            put(4, 'E');
-            put(5, 'F');
-            put(6, 'G');
-            put(7, 'H');
-            put(8, 'I');
-            put(9, 'J');
-            put(10, 'K');
-            put(11, 'L');
-            put(12, 'M');
-            put(13, 'N');
-            put(14, 'O');
-            put(15, 'P');
-            put(16, 'Q');
-            put(17, 'R');
-            put(18, 'S');
-            put(19, 'T');
-            put(20, 'U');
-            put(21, 'V');
-            put(22, 'W');
-            put(23, 'X');
-            put(24, 'Y');
-            put(25, 'Z');
-            put(26, 'a');
-            put(27, 'b');
-            put(28, 'c');
-            put(29, 'd');
-            put(30, 'e');
-            put(31, 'f');
-            put(32, 'g');
-            put(33, 'h');
-            put(34, 'i');
-            put(35, 'j');
-            put(36, 'k');
-            put(37, 'l');
-            put(38, 'm');
-            put(39, 'n');
-            put(40, 'o');
-            put(41, 'p');
-            put(42, 'q');
-            put(43, 'r');
-            put(44, 's');
-            put(45, 't');
-            put(46, 'u');
-            put(47, 'v');
-            put(48, 'w');
-            put(49, 'x');
-            put(50, 'y');
-            put(51, 'z');
-            put(52, '0');
-            put(53, '1');
-            put(54, '2');
-            put(55, '3');
-            put(56, '4');
-            put(57, '5');
-            put(58, '6');
-            put(59, '7');
-            put(60, '8');
-            put(61, '9');
-            put(62, '+');
-            put(63, '/');
-        }
+    private static final char[] ENCODEMAP = {
+        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/'
     };
     private static final HashMap DECODEMAP = new HashMap<Character, Integer>() {
         {
@@ -164,7 +99,7 @@ public class JcBase64 {
         int int2 = (((byte1 << 6) | ((byte2 >> 2))) >> 2) & 0x3F;
         int int3 = (((byte2 << 2 | byte3 >> 6) & 0x3F));
         int int4 = ((byte3 & 0x3F));
-        return "" + ENCODEMAP.get(int1) + ENCODEMAP.get(int2) + ENCODEMAP.get(int3) + ENCODEMAP.get(int4);
+        return ""+ENCODEMAP[int1] + ENCODEMAP[int2] + ENCODEMAP[int3] + ENCODEMAP[int4];
     }
 
     public byte[] decode(String encodedString) {
@@ -248,5 +183,4 @@ public class JcBase64 {
         }
         return encodedString;
     }
-
 }
