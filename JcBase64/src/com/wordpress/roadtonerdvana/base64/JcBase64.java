@@ -126,10 +126,9 @@ public class JcBase64 {
             default:
                 throw new IllegalArgumentException("String of wrong lenght: " + encodedString.length());
         }
-        int i = 0;
         int j = 0;
         int lastDigits = 0;
-        for (; i < encodedString.length(); i += 4) {
+        for (int i=0; i < encodedString.length(); i += 4) {
             lastDigits = encodedString.length() - i;
             if (lastDigits > 3) {
                 int char1 = (int) DECODEMAP.get(encodedString.charAt(i));
@@ -152,7 +151,7 @@ public class JcBase64 {
                 int tail2char2 = (int) DECODEMAP.get(encodedString.charAt(encodedString.length() - 2));
                 int tail2char3 = (int) DECODEMAP.get(encodedString.charAt(encodedString.length() - 1));
                 decodedArray[j++] = (byte) unsignedByte(tail2char1 << 2 | tail2char2 >> 4);
-                decodedArray[j++] = (byte) unsignedByte(tail2char2 << 4 | tail2char3 >> 2);
+                decodedArray[j] = (byte) unsignedByte(tail2char2 << 4 | tail2char3 >> 2);
                 break;
         }
         return decodedArray;
@@ -162,10 +161,9 @@ public class JcBase64 {
         if (arr == null || arr.length == 0) {
             throw new IllegalArgumentException("byte array is null or empty");
         }
-        int i = 0;
         int lastDigits = 0;
         String encodedString = "";
-        for (; i < arr.length; i += 3) {
+        for (int i=0; i < arr.length; i += 3) {
             lastDigits = arr.length - i;
             if (lastDigits > 2) {
                 encodedString += encodeThree(arr[i], arr[i + 1], arr[i + 2]);
